@@ -12,7 +12,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'status',
+        'type',
         'email',
         'password',
         'permissions',
@@ -46,7 +49,7 @@ class User extends Authenticatable
      */
     protected $allowedFilters = [
         'id',
-        'name',
+        'first_name',
         'email',
         'permissions',
     ];
@@ -58,7 +61,7 @@ class User extends Authenticatable
      */
     protected $allowedSorts = [
         'id',
-        'name',
+        'first_name',
         'email',
         'updated_at',
         'created_at',

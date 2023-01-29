@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\System\SettingTypes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('title', 255)->nullable(false);
             $table->text('value');
             $table->string('tab', 64);
-            $table->string('type', 10)->nullable(false)->default(\App\Enums\Settings\SettingEnums::INPUT);
+            $table->string('type', 10)->nullable(false)->default(SettingTypes::INPUT);
             $table->timestamps();
         });
     }

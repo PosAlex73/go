@@ -14,6 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('payment');
+            $table->integer('total');
+            $table->text('data');
+            $table->string('status', 1)->default(\App\Enums\Orders\OrderStatus::OPEN);
+            $table->timestamps();
+        });
+
         Schema::create('user_progress', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
@@ -36,5 +47,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('user_progress');
+        Schema::dropIfExists('orders');
+
     }
 };
