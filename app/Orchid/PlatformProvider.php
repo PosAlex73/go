@@ -38,10 +38,14 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('lock')
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
-            Menu::make(__('Courses'))
-                ->icon('user')
-                ->route('platform.courses')
-                ->title(__('Courses'))
+            Menu::make(__('Courses'))->icon('user')->route('platform.courses')->title(__('Courses')),
+            Menu::make(__('Tasks'))->icon('user')->title(__('Tasks'))->route('platform.tasks'),
+            Menu::make(__('Categories'))->icon('user')->title(__('Categories'))->route('platform.categories'),
+            Menu::make(__('Orders'))->icon('user')->title(__('Orders'))->route('platform.orders'),
+            Menu::make(__('Images'))->icon('user')->title(__('Images'))->route('platform.images'),
+            Menu::make(__('Articles'))->icon('user')->title(__('Articles'))->route('platform.articles'),
+            Menu::make(__('News'))->icon('user')->title('News')->route('platform.news'),
+            Menu::make(__('Pathnotes'))->icon('user')->title('Pathnotes')->route('platform.path_notes')
         ];
     }
 

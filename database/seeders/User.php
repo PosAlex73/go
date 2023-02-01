@@ -25,12 +25,7 @@ class User extends Seeder
                 'last_name' => 'admin',
                 'email' => 'a@a.ru',
                 'password' => Hash::make('admin'),
-                'permissions' => json_encode([
-                    'platform.systems.roles' => true,
-                    'platform.systems.users' => true,
-                    'platform.systems.attachment' => true,
-                    'platform.index' => true
-                ])
+                'permissions' => '{"platform.systems.roles":true,"platform.systems.users":true,"platform.systems.attachment":true,"platform.index":true}'
             ]);
     }
 }

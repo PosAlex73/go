@@ -70,4 +70,29 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function progress()
+    {
+        return $this->hasMany(UserProgress::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasMany(UserProfile::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function thread()
+    {
+        return $this->hasOne(Thread::class);
+    }
+
+    public function taskComments()
+    {
+        return $this->hasMany(TaskComment::class);
+    }
 }
