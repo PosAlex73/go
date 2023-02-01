@@ -4,7 +4,7 @@ namespace App\Enums;
 
 trait Enumable
 {
-    public function getAll()
+    public static function getAll()
     {
         $ref = new \ReflectionClass(static::class);
 

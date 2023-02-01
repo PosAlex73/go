@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 
+use App\Orchid\Screens\Articles\ArticleList;
+use App\Orchid\Screens\Categories\Categorylist;
+use App\Orchid\Screens\Courses\CourseCreate;
 use App\Orchid\Screens\Courses\CourseList;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -11,9 +14,13 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Images\ImageList;
+use App\Orchid\Screens\News\NewsList;
+use App\Orchid\Screens\Orders\OrderList;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Tasks\TaskList;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -101,4 +108,20 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
 
 Route::screen('courses', CourseList::class)->name('platform.courses');
+Route::screen('tasks', TaskList::class)->name('platform.tasks');
+Route::screen('news', NewsList::class)->name('platform.news');
+Route::screen('images', ImageList::class)->name('platform.images');
+Route::screen('categories', Categorylist::class)->name('platform.categories');
+Route::screen('articles', ArticleList::class)->name('platform.articles');
+Route::screen('orders', OrderList::class)->name('platform.orders');
+Route::screen('pathnotes', App\Orchid\Screens\Pathnotes\PathNoteList::class)->name('platform.path_notes');
+
+Route::screen('courses.create', CourseCreate::class)->name('platform.courses.create');
+Route::screen('tasks.create', CourseCreate::class)->name('platform.tasks.create');
+Route::screen('news.create', CourseCreate::class)->name('platform.news.create');
+Route::screen('images.create', CourseCreate::class)->name('platform.images.create');
+Route::screen('categories.create', CourseCreate::class)->name('platform.categories.create');
+Route::screen('articles.create', CourseCreate::class)->name('platform.articles.create');
+Route::screen('orders.create', CourseCreate::class)->name('platform.orders.create');
+Route::screen('pathnotes.create', CourseCreate::class)->name('platform.pathnotes.create');
 

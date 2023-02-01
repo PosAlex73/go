@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CommonStatuses;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $statuses = CommonStatuses::getAll();
+        $status_key = array_rand($statuses);
+
         return [
-            //
+            'title' => $this->faker->text(20),
+            'description' => $this->faker->text(),
+            'status' => $statuses[$status_key]
         ];
     }
 }

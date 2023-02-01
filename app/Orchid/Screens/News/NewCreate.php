@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Orchid\Screens\Categories;
+namespace App\Orchid\Screens\News;
 
-use App\Models\Category;
-use App\Orchid\Layouts\Categories\CategoryListLayout;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class Categorylist extends Screen
+class NewCreate extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -17,9 +13,7 @@ class Categorylist extends Screen
      */
     public function query(): iterable
     {
-        return [
-            'categories' => Category::paginate(config('system.paginate'))
-        ];
+        return [];
     }
 
     /**
@@ -29,7 +23,7 @@ class Categorylist extends Screen
      */
     public function name(): ?string
     {
-        return 'Categorylist';
+        return 'NewCreate';
     }
 
     /**
@@ -39,9 +33,7 @@ class Categorylist extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Link::make(__('Add'))->icon('plus')->route('platform.categories.create')
-        ];
+        return [];
     }
 
     /**
@@ -51,8 +43,6 @@ class Categorylist extends Screen
      */
     public function layout(): iterable
     {
-        return [
-            CategoryListLayout::class
-        ];
+        return [];
     }
 }
