@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\CommonStatuses;
+use App\Enums\Courses\TaskType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(20),
+            'description' => $this->faker->text(500),
+            'data' => '',
+            'status' => CommonStatuses::ACTIVE,
+            'type' => TaskType::THEORY,
+            'points' => 1
         ];
     }
 }

@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\User\UserStatuses;
+use App\Enums\User\UserTypes;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -21,6 +24,12 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'status' => UserStatuses::ACTIVE,
+            'type' => UserTypes::SIMPLE,
+            'password' => Hash::make('user'),
+            'permissions' => '',
         ];
     }
 

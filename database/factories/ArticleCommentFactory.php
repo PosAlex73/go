@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\CommonStatuses;
+use App\Enums\Thread\MessageStatuses;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class ArticleCommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'text' => $this->faker->text(),
+            'status' => MessageStatuses::READ
         ];
     }
 }

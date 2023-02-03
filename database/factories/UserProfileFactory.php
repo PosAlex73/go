@@ -17,7 +17,13 @@ class UserProfileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'phone' => $this->faker->phoneNumber(),
+            'contacted_email' => $this->faker->email(),
+            'age' => mt_rand(18, 55),
+            'country' => $this->faker->countryCode(),
+            'about' => $this->faker->text(),
+            'experience' => mt_rand(1, 10),
+            'image' => $this->faker->imageUrl()
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\User\AchievementTypes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class UserAchieveFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(20),
+            'description' => $this->faker->text(),
+            'achievement' => $this->faker->text(10),
+            'type' => AchievementTypes::COMMON
         ];
     }
 }

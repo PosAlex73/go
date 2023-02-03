@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Orders\OrderStatus;
+use App\Payments\TestPayment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'payment' => TestPayment::class,
+            'total' => mt_rand(100, 500),
+            'data' => '',
+            'status' => OrderStatus::OPEN
         ];
     }
 }

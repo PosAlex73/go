@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\CommonStatuses;
+use App\Enums\System\ImageTypes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(20),
+            'path' => $this->faker->imageUrl(),
+            'type' => ImageTypes::COMMON,
+            'status' => CommonStatuses::ACTIVE
         ];
     }
 }
