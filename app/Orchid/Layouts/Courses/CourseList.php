@@ -30,7 +30,7 @@ class CourseList extends Table
             TD::make('title', 'Title')
                 ->render(function (Course $course) {
                     return Link::make($course->title)
-                        ->route('platform.course.edit', $course);
+                        ->route('platform.courses.create', $course);
                 }),
 
             TD::make('created_at', 'Created'),

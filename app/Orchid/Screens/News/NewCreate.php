@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\News;
 
+use App\Orchid\Layouts\News\NewCreateLayout;
 use Orchid\Screen\Screen;
 
 class NewCreate extends Screen
@@ -43,6 +44,8 @@ class NewCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            NewCreateLayout::class
+        ];
     }
 }

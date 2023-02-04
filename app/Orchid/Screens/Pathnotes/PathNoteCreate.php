@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Pathnotes;
 
+use App\Orchid\Layouts\Pathnotes\PathnoteCreateLayout;
 use Orchid\Screen\Screen;
 
 class PathNoteCreate extends Screen
@@ -43,6 +44,8 @@ class PathNoteCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            PathnoteCreateLayout::class
+        ];
     }
 }

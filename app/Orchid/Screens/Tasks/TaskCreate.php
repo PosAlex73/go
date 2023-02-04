@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Tasks;
 
+use App\Orchid\Layouts\Tasks\TaskCreateLayout;
 use Orchid\Screen\Screen;
 
 class TaskCreate extends Screen
@@ -43,6 +44,8 @@ class TaskCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            TaskCreateLayout::class
+        ];
     }
 }

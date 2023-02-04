@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Images;
 
+use App\Orchid\Layouts\Images\ImageCreateLayout;
+use App\Orchid\Layouts\Images\ImageListLayout;
 use Orchid\Screen\Screen;
 
 class ImageCreate extends Screen
@@ -43,6 +45,8 @@ class ImageCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            ImageCreateLayout::class
+        ];
     }
 }

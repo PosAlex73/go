@@ -2,7 +2,14 @@
 
 namespace App\Orchid\Screens\Articles;
 
+use App\Models\Article;
+use App\Orchid\Layouts\Articles\ArticleListLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
 
 class ArticleList extends Screen
 {
@@ -13,7 +20,9 @@ class ArticleList extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'articles' => Article::paginate(config('system.paginate'))
+        ];
     }
 
     /**
@@ -33,7 +42,10 @@ class ArticleList extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Create article'))->icon('plus')->route('platform.articles.create'),
+            Button::make(__('Remove articles'))->icon('close')->method('remove')->type(Color::DANGER())
+        ];
     }
 
     /**
@@ -43,6 +55,18 @@ class ArticleList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            ArticleListLayout::class
+        ];
+    }
+
+    public function remove(Request $request)
+    {
+        $articles = $request->get('articles');
+        Article::destroy($articles);
+
+        Alert::info(__('Articles were deleted'));
+
+        return redirect()->route('platform.articles');
     }
 }

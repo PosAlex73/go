@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Tasks;
 
+use App\Orchid\Layouts\Tasks\TableListLayout;
 use Orchid\Screen\Screen;
 
 class TaskList extends Screen
@@ -43,6 +44,8 @@ class TaskList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            TableListLayout::class
+        ];
     }
 }

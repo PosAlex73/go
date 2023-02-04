@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Images;
 
+use App\Orchid\Layouts\Images\ImageListLayout;
 use Orchid\Screen\Screen;
 
 class ImageList extends Screen
@@ -43,6 +44,9 @@ class ImageList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            ImageListLayout::class
+
+        ];
     }
 }

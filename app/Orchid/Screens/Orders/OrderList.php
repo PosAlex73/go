@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Orders;
 
+use App\Orchid\Layouts\Orders\OrderListLayout;
 use Orchid\Screen\Screen;
 
 class OrderList extends Screen
@@ -43,6 +44,8 @@ class OrderList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            OrderListLayout::class
+        ];
     }
 }

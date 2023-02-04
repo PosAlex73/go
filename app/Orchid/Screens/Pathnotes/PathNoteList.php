@@ -43,6 +43,8 @@ class PathNoteList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            PathNoteList::class
+        ];
     }
 }

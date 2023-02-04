@@ -2,18 +2,32 @@
 
 namespace App\Orchid\Screens\Articles;
 
+use App\Models\Article;
+use App\Orchid\Layouts\Articles\ArticleCreate;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
+use Orchid\Support\Facades\Layout;
 
 class ArticlesCreate extends Screen
 {
+    public Article $article;
+
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Article $article): iterable
     {
-        return [];
+        $this->article = $article;
+
+        return [
+            'article' => $article
+        ];
     }
 
     /**
@@ -33,7 +47,15 @@ class ArticlesCreate extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        $buttons = [
+            Link::make(__('Back'))->icon('left')->route('platform.articles'),
+        ];
+
+        if ($this->article->id) {
+            $buttons[] = Button::make(__('Remove'))->method('remove')->type(Color::DANGER());
+        }
+
+        return $buttons;
     }
 
     /**
@@ -43,6 +65,27 @@ class ArticlesCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            Layout::tabs([
+                __('General info') => [
+                    ArticleCreate::class
+                ],
+                __('Article tabs') => [
+                    Layout::rows([
+                        Input::make('address')
+                            ->type('text')
+                            ->required(),
+                    ]),
+                ],
+            ]),
+        ];
+    }
+
+    public function remove(Article $article)
+    {
+        $article->delete();
+        Alert::info('Article was delete');
+
+        return redirect()->route('platform.articles');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\News;
 
+use App\Orchid\Layouts\News\NewsListLayout;
 use Orchid\Screen\Screen;
 
 class NewsList extends Screen
@@ -43,6 +44,8 @@ class NewsList extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            NewsListLayout::class
+        ];
     }
 }
