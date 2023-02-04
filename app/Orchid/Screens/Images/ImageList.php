@@ -2,8 +2,13 @@
 
 namespace App\Orchid\Screens\Images;
 
+use App\Models\Image;
 use App\Orchid\Layouts\Images\ImageListLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Alert;
 
 class ImageList extends Screen
 {
@@ -14,7 +19,9 @@ class ImageList extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'images' => Image::paginate(config(__('system.paginate')))
+        ];
     }
 
     /**
@@ -34,7 +41,13 @@ class ImageList extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Add image'))
+                ->icon('pencil')
+                ->route('platform.images.create'),
+
+            Button::make(__('Remove images'))->icon('trash')->method('remove')
+        ];
     }
 
     /**
@@ -46,7 +59,14 @@ class ImageList extends Screen
     {
         return [
             ImageListLayout::class
-
         ];
+    }
+
+    public function remove(Request $request)
+    {
+        Image::destroy($request->get('images'));
+        Alert::success(__('Images were delete'));
+
+        return redirect()->route('platform.images');
     }
 }

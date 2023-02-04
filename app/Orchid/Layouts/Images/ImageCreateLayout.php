@@ -2,7 +2,13 @@
 
 namespace App\Orchid\Layouts\Images;
 
+use App\Enums\CommonStatuses;
+use App\Enums\System\ImageTypes;
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
 class ImageCreateLayout extends Rows
@@ -21,6 +27,11 @@ class ImageCreateLayout extends Rows
      */
     protected function fields(): iterable
     {
-        return [];
+        return [
+            Input::make('image.title')->title(__('Title')),
+            Select::make('image.status')->options(CommonStatuses::getForForm())->title(__('Status')),
+            Select::make('image.type')->options(ImageTypes::getForForm())->title(__('Type')),
+            Picture::make('image.path')
+        ];
     }
 }

@@ -2,8 +2,14 @@
 
 namespace App\Orchid\Screens\Tasks;
 
+use App\Models\Task;
 use App\Orchid\Layouts\Tasks\TableListLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
 
 class TaskList extends Screen
 {
@@ -14,7 +20,9 @@ class TaskList extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'tasks' => Task::paginate(config('system.paginate'))
+        ];
     }
 
     /**
@@ -34,7 +42,10 @@ class TaskList extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Create task'))->route('platform.tasks.create')->icon('plus'),
+            Button::make(__('Remove'))->method('remove')->type(Color::DANGER())
+        ];
     }
 
     /**
@@ -47,5 +58,13 @@ class TaskList extends Screen
         return [
             TableListLayout::class
         ];
+    }
+
+    public function remove(Request $request)
+    {
+        Task::destroy($request->get('tasks'));
+        Alert::success(__('Task were delete'));
+
+        return redirect()->route('platform.tasks');
     }
 }

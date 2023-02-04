@@ -2,9 +2,13 @@
 
 namespace App\Orchid\Screens\Images;
 
+use App\Models\Image;
 use App\Orchid\Layouts\Images\ImageCreateLayout;
-use App\Orchid\Layouts\Images\ImageListLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Alert;
 
 class ImageCreate extends Screen
 {
@@ -13,9 +17,11 @@ class ImageCreate extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Image $image): iterable
     {
-        return [];
+        return [
+            'image' => $image
+        ];
     }
 
     /**
@@ -35,7 +41,11 @@ class ImageCreate extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Back'))->icon('left')->route('platform.images'),
+            Button::make(__('Save'))->icon('plus')->method('save'),
+            Button::make(__('Remove'))->icon('trash')->method('remove')
+        ];
     }
 
     /**
@@ -48,5 +58,21 @@ class ImageCreate extends Screen
         return [
             ImageCreateLayout::class
         ];
+    }
+
+    public function save(Image $image, Request $request)
+    {
+        $image->fill($request->get('image'))->save();
+        Alert::success(__('Image was save'));
+
+        return redirect()->route('platform.images');
+    }
+
+    public function remove(Image $image)
+    {
+        $image->delete();
+        Alert::success(__('Image was delete'));
+
+        return redirect()->route('platform.images');
     }
 }
