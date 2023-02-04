@@ -2,7 +2,14 @@
 
 namespace App\Orchid\Layouts\News;
 
+use App\Enums\CommonStatuses;
+use App\Models\AppNew;
+use Illuminate\Support\Facades\App;
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
+use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
 class NewCreateLayout extends Rows
@@ -21,6 +28,11 @@ class NewCreateLayout extends Rows
      */
     protected function fields(): iterable
     {
-        return [];
+        return [
+            Input::make('app_new.title')->title(__('Title')),
+            Quill::make('app_new.description')->title(__('Description')),
+            Select::make('app_new.status')->options(CommonStatuses::getForForm())->title(__('Status')),
+            Picture::make('app_new.image')
+        ];
     }
 }

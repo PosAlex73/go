@@ -4,10 +4,13 @@ namespace App\Orchid\Screens\Courses;
 
 use App\Models\Course;
 use App\Orchid\Layouts\Courses\CourseCreateLayout;
+use App\Orchid\Layouts\Courses\CourseTasksLayout;
+use App\Orchid\Layouts\Courses\CourseTasksPanelLayout;
 use Illuminate\Http\Request;
 use Orchid\Alert\Alert;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 
@@ -21,7 +24,8 @@ class CourseCreate extends Screen
     public function query(Course $course): iterable
     {
         return [
-            'course' => $course
+            'course' => $course,
+            'tasks' => $course->tasks
         ];
     }
 
@@ -57,7 +61,13 @@ class CourseCreate extends Screen
     public function layout(): iterable
     {
         return [
-            CourseCreateLayout::class
+            \Orchid\Support\Facades\Layout::tabs([
+                __('General info') => CourseCreateLayout::class,
+                __('Course tasks') => [
+                        CourseTasksLayout::class,
+                    ]
+                ],
+            )
         ];
     }
 

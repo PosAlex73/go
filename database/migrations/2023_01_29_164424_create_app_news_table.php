@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('status')->default(\App\Enums\CommonStatuses::ACTIVE);
-            $table->string('image', 1024);
+            $table->string('image', 1024)->nullable()->default('');
             $table->timestamps();
         });
     }

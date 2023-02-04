@@ -2,6 +2,9 @@
 
 namespace App\Orchid\Layouts\News;
 
+use App\Models\AppNew;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -15,7 +18,7 @@ class NewsListLayout extends Table
      *
      * @var string
      */
-    protected $target = '';
+    protected $target = 'app_news';
 
     /**
      * Get the table cells to be displayed.
@@ -24,6 +27,18 @@ class NewsListLayout extends Table
      */
     protected function columns(): iterable
     {
-        return [];
+        return [
+            TD::make('#')->render(function (AppNew $new) {
+                return CheckBox::make('news')->checked(false)->value($new->id);
+            }),
+            TD::make('title')->render(function (AppNew $new) {
+                return Link::make($new->title)->route('platform.news.create', ['new' => $new]);
+            }),
+            TD::make('status')->render(function (AppNew $new) {
+                return view('admin.fields.common_status', ['status' => $new->status]);
+            }),
+            TD::make('updated_at'),
+            TD::make('created_at')
+        ];
     }
 }
