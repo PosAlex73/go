@@ -4,9 +4,9 @@ namespace App\Orchid\Screens\Articles;
 
 use App\Models\Article;
 use App\Orchid\Layouts\Articles\ArticleCreate;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
@@ -49,11 +49,14 @@ class ArticlesCreate extends Screen
     {
         $buttons = [
             Link::make(__('Back'))->icon('left')->route('platform.articles'),
+            Button::make(__('Save'))->icon('plus')->method('create')
         ];
 
         if ($this->article->id) {
             $buttons[] = Button::make(__('Remove'))->method('remove')->type(Color::DANGER());
         }
+
+
 
         return $buttons;
     }
@@ -72,9 +75,7 @@ class ArticlesCreate extends Screen
                 ],
                 __('Article tabs') => [
                     Layout::rows([
-                        Input::make('address')
-                            ->type('text')
-                            ->required(),
+
                     ]),
                 ],
             ]),
@@ -87,5 +88,13 @@ class ArticlesCreate extends Screen
         Alert::info('Article was delete');
 
         return redirect()->route('platform.articles');
+    }
+
+    public function create(Article $article, Request $request)
+    {
+        $article->fill($request->get('article'))->save();
+        Alert::info(__('Article was saved!'));
+
+        return redirect()->to('platform.articles');
     }
 }

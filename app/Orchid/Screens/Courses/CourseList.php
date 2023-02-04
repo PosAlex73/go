@@ -3,9 +3,12 @@
 namespace App\Orchid\Screens\Courses;
 
 use App\Models\Course;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
 class CourseList extends Screen
@@ -43,9 +46,11 @@ class CourseList extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make(__('Create course'))
+            Link::make(__('Create course'))
                 ->icon('pencil')
-                ->method('create')
+                ->route('platform.courses.create'),
+
+            Button::make(__('Remove courses'))->icon('trash')->method('remove')
         ];
     }
 
@@ -59,5 +64,13 @@ class CourseList extends Screen
         return [
             \App\Orchid\Layouts\Courses\CourseList::class
         ];
+    }
+
+    public function remove(Request $request)
+    {
+        Course::destroy($request->get('courses'));
+        Alert::success(__('Courses were delete'));
+
+        return redirect()->route('platform.courses');
     }
 }

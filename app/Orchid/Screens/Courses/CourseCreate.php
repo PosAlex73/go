@@ -4,7 +4,12 @@ namespace App\Orchid\Screens\Courses;
 
 use App\Models\Course;
 use App\Orchid\Layouts\Courses\CourseCreateLayout;
+use Illuminate\Http\Request;
+use Orchid\Alert\Alert;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 
 class CourseCreate extends Screen
 {
@@ -37,7 +42,11 @@ class CourseCreate extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Back'))->icon('left')->route('platform.courses'),
+            Button::make(__('Save'))->icon('plus')->method('create'),
+            Button::make(__('Remove'))->icon('trash')->method('remove')->type(Color::DANGER())
+        ];
     }
 
     /**
@@ -50,5 +59,21 @@ class CourseCreate extends Screen
         return [
             CourseCreateLayout::class
         ];
+    }
+
+    public function create(Course $course, Request $request)
+    {
+        $course->fill($request->get('course'))->save();
+        \Orchid\Support\Facades\Alert::success(__('Course was saved'));
+
+        return redirect()->route('platform.courses');
+    }
+
+    public function remove(Request $request)
+    {
+        Course::destroy($request->get('courses'));
+        \Orchid\Support\Facades\Alert::success(__('Courses were delete'));
+
+        return redirect()->route('platform.courses');
     }
 }
