@@ -2,7 +2,14 @@
 
 namespace App\Orchid\Screens\Pathnotes;
 
+use App\Models\PathNote;
+use App\Orchid\Layouts\Pathnotes\PathnoteListLayout;
+use Illuminate\Http\Request;
+use Orchid\Alert\Alert;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 
 class PathNoteList extends Screen
 {
@@ -13,7 +20,9 @@ class PathNoteList extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'pathnotes' => PathNote::paginate(config('system.paginate'))
+        ];
     }
 
     /**
@@ -33,7 +42,10 @@ class PathNoteList extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Create patch note'))->route('platform.pathnotes.create')->icon('plus'),
+            Button::make(__('Remove'))->method('remove')->type(Color::DANGER())
+        ];
     }
 
     /**
@@ -44,7 +56,15 @@ class PathNoteList extends Screen
     public function layout(): iterable
     {
         return [
-            PathNoteList::class
+            PathnoteListLayout::class
         ];
+    }
+
+    public function remove(Request $request)
+    {
+        PathNote::destroy($request->get('pathnotes'));
+        \Orchid\Support\Facades\Alert::success('Patch notes were delete');
+
+        return redirect()->route('platform.path_notes');
     }
 }

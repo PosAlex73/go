@@ -131,4 +131,3 @@ Route::screen('categories/create/{category?}', CategoryCreate::class)->name('pla
 Route::screen('articles/create/{article?}', ArticlesCreate::class)->name('platform.articles.create');
 Route::screen('orders/create/{orders?}', OrderCreate::class)->name('platform.orders.create');
 Route::screen('pathnotes/create/{pathnote?}', PathNoteCreate::class)->name('platform.pathnotes.create');
-

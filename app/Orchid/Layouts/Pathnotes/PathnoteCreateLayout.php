@@ -2,7 +2,10 @@
 
 namespace App\Orchid\Layouts\Pathnotes;
 
+use App\Enums\System\PathTypes;
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
 
 class PathnoteCreateLayout extends Rows
@@ -21,6 +24,9 @@ class PathnoteCreateLayout extends Rows
      */
     protected function fields(): iterable
     {
-        return [];
+        return [
+            TextArea::make('pathnote.description'),
+            Select::make('pathnote.type')->options(PathTypes::getForForm())
+        ];
     }
 }
