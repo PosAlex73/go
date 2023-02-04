@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Categories;
 
 use App\Models\Category;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -26,7 +27,9 @@ class CategoryListLayout extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('title'),
+            TD::make('title')->render(
+                fn (Category $category) => Link::make($category->title)->route('platform.categories.create', $category)
+            ),
             TD::make('status')->render(function (Category $category) {
                 return $category->status;
             }),

@@ -2,6 +2,11 @@
 
 namespace App\Orchid\Screens\Categories;
 
+use App\Models\Category;
+use App\Orchid\Layouts\Categories\CategoryCreateLayout;
+use Illuminate\Http\Request;
+use Orchid\Alert\Alert;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class CategoryCreate extends Screen
@@ -11,9 +16,11 @@ class CategoryCreate extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Category $category): iterable
     {
-        return [];
+        return [
+            'category' => $category
+        ];
     }
 
     /**
@@ -23,7 +30,7 @@ class CategoryCreate extends Screen
      */
     public function name(): ?string
     {
-        return 'CategoryCreate';
+        return __('Create category');
     }
 
     /**
@@ -33,7 +40,9 @@ class CategoryCreate extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Back'))->route('platform.categories')
+        ];
     }
 
     /**
@@ -43,6 +52,24 @@ class CategoryCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            CategoryCreateLayout::class
+        ];
+    }
+
+    public function create(Category $category, Request $request)
+    {
+        $category->fill($request->get('category'))->save();
+        \Orchid\Support\Facades\Alert::success(__('Category was created!'));
+        return redirect()->route('platform.categories');
+    }
+
+    public function remove(Category $category)
+    {
+        $category->delete();
+
+        \Orchid\Support\Facades\Alert::info(__('Category was deleted'));
+
+        return redirect()->route('platform.categories');
     }
 }

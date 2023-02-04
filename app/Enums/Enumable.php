@@ -10,4 +10,9 @@ trait Enumable
 
         return $ref->getConstants();
     }
+
+    public static function getForForm()
+    {
+        return array_flip(static::getAll());
+    }
 }

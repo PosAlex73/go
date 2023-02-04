@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Courses;
 
+use App\Models\Course;
+use App\Orchid\Layouts\Courses\CourseCreateLayout;
 use Orchid\Screen\Screen;
 
 class CourseCreate extends Screen
@@ -11,9 +13,11 @@ class CourseCreate extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Course $course): iterable
     {
-        return [];
+        return [
+            'course' => $course
+        ];
     }
 
     /**
@@ -43,6 +47,8 @@ class CourseCreate extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            CourseCreateLayout::class
+        ];
     }
 }

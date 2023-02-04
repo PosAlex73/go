@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 
 use App\Orchid\Screens\Articles\ArticleList;
+use App\Orchid\Screens\Articles\ArticlesCreate;
+use App\Orchid\Screens\Categories\CategoryCreate;
 use App\Orchid\Screens\Categories\Categorylist;
 use App\Orchid\Screens\Courses\CourseCreate;
 use App\Orchid\Screens\Courses\CourseList;
@@ -14,12 +16,17 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Images\ImageCreate;
 use App\Orchid\Screens\Images\ImageList;
+use App\Orchid\Screens\News\NewCreate;
 use App\Orchid\Screens\News\NewsList;
+use App\Orchid\Screens\Orders\OrderCreate;
 use App\Orchid\Screens\Orders\OrderList;
+use App\Orchid\Screens\Pathnotes\PathNoteCreate;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Tasks\TaskCreate;
 use App\Orchid\Screens\Tasks\TaskList;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
@@ -116,12 +123,12 @@ Route::screen('articles', ArticleList::class)->name('platform.articles');
 Route::screen('orders', OrderList::class)->name('platform.orders');
 Route::screen('pathnotes', App\Orchid\Screens\Pathnotes\PathNoteList::class)->name('platform.path_notes');
 
-Route::screen('courses.create', CourseCreate::class)->name('platform.courses.create');
-Route::screen('tasks.create', CourseCreate::class)->name('platform.tasks.create');
-Route::screen('news.create', CourseCreate::class)->name('platform.news.create');
-Route::screen('images.create', CourseCreate::class)->name('platform.images.create');
-Route::screen('categories.create', CourseCreate::class)->name('platform.categories.create');
-Route::screen('articles.create', CourseCreate::class)->name('platform.articles.create');
-Route::screen('orders.create', CourseCreate::class)->name('platform.orders.create');
-Route::screen('pathnotes.create', CourseCreate::class)->name('platform.pathnotes.create');
+Route::screen('courses/create/{course?}', CourseCreate::class)->name('platform.courses.create');
+Route::screen('tasks/create/{task?}', TaskCreate::class)->name('platform.tasks.create');
+Route::screen('news/create/{new?}', NewCreate::class)->name('platform.news.create');
+Route::screen('images/create{image?}', ImageCreate::class)->name('platform.images.create');
+Route::screen('categories/create/{category?}', CategoryCreate::class)->name('platform.categories.create');
+Route::screen('articles/create/{article?}', ArticlesCreate::class)->name('platform.articles.create');
+Route::screen('orders/create/{orders?}', OrderCreate::class)->name('platform.orders.create');
+Route::screen('pathnotes/create/{pathnote?}', PathNoteCreate::class)->name('platform.pathnotes.create');
 
