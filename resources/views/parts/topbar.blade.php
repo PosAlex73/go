@@ -121,25 +121,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg"
-                             alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-1">Patrick</span>
-                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a class="dropdown-item" href="pages-profile.html"><i class="bx bx-user font-size-16 align-middle me-1"></i>
-                            Profile</a>
-                        <a class="dropdown-item" href="pages-lock-screen.html"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i>
-                            Lock screen</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="pages-login.html"><i
-                                class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> Logout</a>
-                    </div>
-                </div>
+                @include('parts.user_menu')
 
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
@@ -150,25 +132,7 @@
             </div>
             <div>
                 <!-- LOGO -->
-                <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
-                                        <span class="logo-sm">
-                                            <img src="assets/images/logo-sm.png" alt="logo" height="20">
-                                        </span>
-                        <span class="logo-lg">
-                                            <img src="assets/images/logo-dark.png" alt="logo" height="17">
-                                        </span>
-                    </a>
 
-                    <a href="index.html" class="logo logo-light">
-                                        <span class="logo-sm">
-                                            <img src="assets/images/logo-sm.png" alt="logo" height="20">
-                                        </span>
-                        <span class="logo-lg">
-                                            <img src="assets/images/logo-light.png" alt="logo" height="19">
-                                        </span>
-                    </a>
-                </div>
 
                 <button type="button" class="btn btn-sm px-3 font-size-16 header-item toggle-btn waves-effect"
                         id="vertical-menu-btn">

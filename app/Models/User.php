@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Orchid\Platform\Models\User as Authenticatable;
 use Orchid\Screen\AsSource;
@@ -94,5 +95,10 @@ class User extends Authenticatable
     public function taskComments()
     {
         return $this->hasMany(TaskComment::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }
