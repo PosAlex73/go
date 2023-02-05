@@ -8,13 +8,8 @@ use App\Models\UserProfile;
 
 class UserProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $user =1;
+        return view('front.profile.index');
     }
 }
